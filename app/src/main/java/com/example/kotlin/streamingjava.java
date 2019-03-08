@@ -1,9 +1,15 @@
 package com.example.kotlin;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ext.ima.ImaAdsLoader;
@@ -14,18 +20,24 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-public class streamingjava extends AppCompatActivity {
+public class streamingjava extends Activity {
     PlayerView playerView;
     SimpleExoPlayer player;
     ImaAdsLoader imaAdsLoader;
+    ImageView exo_pause;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_stream);
         playerView = findViewById(R.id.playerview);
 
-        imaAdsLoader = new ImaAdsLoader(this, Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
+
+
+
+        imaAdsLoader = new ImaAdsLoader(this, Uri.parse("https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator="));
     }
 
     @Override
@@ -38,6 +50,8 @@ public class streamingjava extends AppCompatActivity {
         AdsMediaSource adsMediaSource = new AdsMediaSource(extractorMediaSource, defaultTrackSelector, imaAdsLoader, playerView.getOverlayFrameLayout());
         player.prepare(adsMediaSource);
         player.setPlayWhenReady(true);
+        Log.d("playerposition", String.valueOf(player.getPlayWhenReady()));
+
     }
 
     @Override
@@ -46,6 +60,12 @@ public class streamingjava extends AppCompatActivity {
         playerView.setPlayer(null);
         player.release();
         player = null;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.setPlayWhenReady(false);
     }
 
     @Override

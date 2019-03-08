@@ -24,7 +24,8 @@
         </activity>
         <activity android:name=".Maind3">
         </activity>
-        <activity android:name=".streamingjava">
+        <activity android:name=".streamingjava"
+        android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
