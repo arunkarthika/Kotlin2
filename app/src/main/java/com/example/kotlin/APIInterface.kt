@@ -14,6 +14,9 @@ interface APIInterface {
     @GET("/api/unknown")
     fun doGetListResources(): Call<MultipleResource>
 
+    @GET("/api/unknown")
+    fun checkpta():Call<MultipleResource>
+
     @POST("/api/users")
     fun createUser(@Body user: User): Call<User>
 

@@ -65,4 +65,11 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView android:layout_width="match_parent"
+                                                              android:layout_height="match_parent"
+        android:id="@+id/playere">
+
+        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
